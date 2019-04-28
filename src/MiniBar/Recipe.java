@@ -66,8 +66,22 @@ public class Recipe {
 		return title;
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
+	public boolean setTitle(String title) {
+		
+		// Erlaubt sind: Buchstaben, Zahlen, Symbol: (),.\s
+		// wir wollen, dass am Anfang entweder Zahlen oder Buchstaben stehen
+		String titleRegex = "[aA-zZ\\d\\s\\(\\)]+"
+				+ "(\\s|\\.|\\,)?"
+				+ "[aA-zZ\\d\\,\\.\\s\\(\\)]*";
+		
+		if (title.matches(titleRegex)) {
+			System.out.println("Gültige Eingabe übernommen.");
+			this.title = title;
+			return true; 
+		} else {
+		System.out.println("Eingabe ungültig. Bitte erneut eingeben.");
+		return false; 
+		}
 	}
 	
 	
@@ -92,42 +106,20 @@ public class Recipe {
 //				+ "(\\s" // Wichtig: Space zur Trennung zum Nachnamen ... 
 //				+ "[A-Za-z]+))"); 
 		
-		// meine Versuche:
-		// Jan-Uwe Klausen, Jan Klausen
-		// Filtert Jan-: [aA-zZ]+\\-?"
-		// Filter Jan UND Jan-Uwe
-		String authorRegex = "([A-Z]{1}[a-z]{1,30}|[A-Z]{1}[a-z]{1,30}+)|"
-				+ "([A-Z]{1}[a-z]{1,30}+[- ])"
-				+ "[A-Z]{1}[a-z]{1,30}";
+		// Erlaubt sind folgende Ausdrücke: Peter, Peter , Peter Klausen
+		// Peter-Uwe, Peter-Uwe Klausen, Peter-Uwe, Klausen-Maaß
+		String authorRegex = "[A-Za-z]+((\\s|\\-[A-Za-z]+(\\s?))([A-Za-z](\\-[A-Za-z]+)?)*)?";
 				
-//		String authorRegex = "[A-Za-z]+" // Ersten Teil des Vornamens
-//				+ "((\\-[A-Za-z]+)|" // Optional durch Verorderung: Zweiten Teil des Vornames
-//				+ "(\\s" // Wichtig: Space zur Trennung zum Nachnamen ... 
-//				+ "[A-Za-z]+))";
-//				
-		// Peter-Uwe Knechten soll auch gehen!! Momentan geht nur: Peter-Uwe und Uwe Knechten
-
-
-		
-		
-		//Matcher matcher = pattern.matcher(author);
-		
 		if(author.matches(authorRegex)) {
-			System.out.println("yoooo");
-			System.out.println(author);
+			System.out.println("Gültige Eingabe übernommen.");
 			
 			this.author = author;
 			return true;
 			
 		}else{
-			System.out.println("nöööö");
-			System.out.println(author);
-			
+			System.out.println("Eingabe ungültig. Bitte erneut eingeben.");
 			return false;
-		}
-		
-
-		
+		}		
 	}
 
 	public String getIngredients() {
