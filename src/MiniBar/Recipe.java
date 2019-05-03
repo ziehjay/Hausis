@@ -1,11 +1,14 @@
 package MiniBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Recipe {
+public class Recipe implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String title;
 	private String author;
 	private String ingredients;

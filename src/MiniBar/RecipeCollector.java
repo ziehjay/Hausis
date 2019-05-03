@@ -1,9 +1,13 @@
 package MiniBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RecipeCollector {
+public class RecipeCollector implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
+	
 	// ArrayList wird erstellt
 	private ArrayList<Recipe> recipies = new ArrayList<Recipe>(); // nimmt nur die Objekte des Typs Receipt!!!
 	

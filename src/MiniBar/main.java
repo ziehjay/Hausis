@@ -13,5 +13,13 @@ public class main {
 		meineLieblingsrezepte.addRecipe(nudelsuppe);
 		
 		System.out.println(meineLieblingsrezepte.showRecipies("Nudelsuppe"));	
+		
+		IOServiceObject ioService = new IOServiceObject(); 
+		
+		ioService.createFolder(); 
+		
+		ioService.write(nudelsuppe, true); 
+		ioService.write(meineLieblingsrezepte, true); 
+		
 	}
 }
